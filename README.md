@@ -1,7 +1,7 @@
 # Angular Karam Testing
 
 [![Build Status](https://travis-ci.com/ttma1046/angular-karam-testing.svg?branch=master)](https://travis-ci.com/ttma1046/angular-karam-testing)
-[![CircleCI](https://circleci.com/gh/ttma1046/angular-karam-testing/tree/master.svg?style=svg)](https://circleci.com/gh/ttma1046/angular-karam-testing/tree/master)
+[![CircleCI](https://circleci.com/gh/ttma1046/angular-karam-testing/tree/master.svg?style=shield)](https://circleci.com/gh/ttma1046/angular-karam-testing/tree/master)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
 
