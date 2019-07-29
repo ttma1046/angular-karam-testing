@@ -1,20 +1,20 @@
 /* tslint:disable:member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router }   from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Hero }              from '../model/hero';
+import { Hero } from '../model/hero';
 import { HeroDetailService } from './hero-detail.service';
 
 @Component({
-  selector:    'app-hero-detail',
+  selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls:  ['./hero-detail.component.css' ],
-  providers:  [ HeroDetailService ]
+  styleUrls: ['./hero-detail.component.css'],
+  providers: [HeroDetailService]
 })
 export class HeroDetailComponent implements OnInit {
   constructor(
     private heroDetailService: HeroDetailService,
-    private route:  ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router) {
   }
 
@@ -48,6 +48,6 @@ export class HeroDetailComponent implements OnInit {
   cancel() { this.gotoList(); }
 
   gotoList() {
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

@@ -1,12 +1,12 @@
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
-import { UserService }      from '../model/user.service';
+import { UserService } from '../model/user.service';
 import { WelcomeComponent } from './welcome.component';
 
 class MockUserService {
   isLoggedIn = true;
-  user = { name: 'Test User'};
-};
+  user = { name: 'Test User' };
+}
 
 describe('WelcomeComponent (class only)', () => {
   let comp: WelcomeComponent;
@@ -50,24 +50,24 @@ describe('WelcomeComponent', () => {
   let userService: UserService; // the TestBed injected service
   let el: HTMLElement; // the DOM element with the welcome message
 
-    let userServiceStub: Partial<UserService>;
+  let userServiceStub: Partial<UserService>;
 
   beforeEach(() => {
     // stub UserService for test purposes
     userServiceStub = {
       isLoggedIn: true,
-      user: { name: 'Test User'}
+      user: { name: 'Test User' }
     };
 
     TestBed.configureTestingModule({
-       declarations: [ WelcomeComponent ],
-    // providers:    [ UserService ]  // NO! Don't provide the real service!
-                                      // Provide a test-double instead
-       providers:    [ {provide: UserService, useValue: userServiceStub } ]
+      declarations: [WelcomeComponent],
+      // providers:    [ UserService ]  // NO! Don't provide the real service!
+      // Provide a test-double instead
+      providers: [{ provide: UserService, useValue: userServiceStub }]
     });
 
     fixture = TestBed.createComponent(WelcomeComponent);
-    comp    = fixture.componentInstance;
+    comp = fixture.componentInstance;
 
     // UserService actually injected into the component
     userService = fixture.debugElement.injector.get(UserService);
@@ -102,8 +102,8 @@ describe('WelcomeComponent', () => {
 
   it('should inject the component\'s UserService instance',
     inject([UserService], (service: UserService) => {
-    expect(service).toBe(componentUserService);
-  }));
+      expect(service).toBe(componentUserService);
+    }));
 
   it('TestBed and Component UserService should be the same', () => {
     expect(userService === componentUserService).toBe(true);

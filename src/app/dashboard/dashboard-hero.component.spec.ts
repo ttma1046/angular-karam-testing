@@ -1,5 +1,6 @@
 
-import { async, ComponentFixture, TestBed
+import {
+  async, ComponentFixture, TestBed
 } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
@@ -10,7 +11,7 @@ import { addMatchers, click } from '../../testing';
 import { Hero } from '../model/hero';
 import { DashboardHeroComponent } from './dashboard-hero.component';
 
-beforeEach( addMatchers );
+beforeEach(addMatchers);
 
 describe('DashboardHeroComponent class only', () => {
   it('raises the selected event when clicked', () => {
@@ -33,17 +34,17 @@ describe('DashboardHeroComponent when tested directly', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardHeroComponent ]
+      declarations: [DashboardHeroComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DashboardHeroComponent);
-    comp    = fixture.componentInstance;
+    comp = fixture.componentInstance;
 
     // find the hero's DebugElement and element
-    heroDe  = fixture.debugElement.query(By.css('.hero'));
+    heroDe = fixture.debugElement.query(By.css('.hero'));
     heroEl = heroDe.nativeElement;
 
     // mock the hero supplied by the parent component
@@ -69,13 +70,13 @@ describe('DashboardHeroComponent when tested directly', () => {
     expect(selectedHero).toBe(expectedHero);
   });
 
-    it('should raise selected event when clicked (element.click)', () => {
-      let selectedHero: Hero;
-      comp.selected.subscribe((hero: Hero) => selectedHero = hero);
+  it('should raise selected event when clicked (element.click)', () => {
+    let selectedHero: Hero;
+    comp.selected.subscribe((hero: Hero) => selectedHero = hero);
 
-      heroEl.click();
-      expect(selectedHero).toBe(expectedHero);
-    });
+    heroEl.click();
+    expect(selectedHero).toBe(expectedHero);
+  });
 
   it('should raise selected event when clicked (click helper)', () => {
     let selectedHero: Hero;
@@ -97,16 +98,16 @@ describe('DashboardHeroComponent when inside a test host', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardHeroComponent, TestHostComponent ]
+      declarations: [DashboardHeroComponent, TestHostComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     // create TestHostComponent instead of DashboardHeroComponent
-    fixture  = TestBed.createComponent(TestHostComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;
-    heroEl   = fixture.nativeElement.querySelector('.hero');
+    heroEl = fixture.nativeElement.querySelector('.hero');
     fixture.detectChanges(); // trigger initial data binding
   });
 
@@ -132,7 +133,7 @@ import { Component } from '@angular/core';
     </dashboard-hero>`
 })
 class TestHostComponent {
-  hero: Hero = {id: 42, name: 'Test Name' };
+  hero: Hero = { id: 42, name: 'Test Name' };
   selectedHero: Hero;
   onSelected(hero: Hero) { this.selectedHero = hero; }
 }

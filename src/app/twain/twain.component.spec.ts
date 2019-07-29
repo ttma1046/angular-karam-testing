@@ -1,12 +1,12 @@
 import { async, fakeAsync, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 
-import { asyncData, asyncError }  from '../../testing';
+import { asyncData, asyncError } from '../../testing';
 
 import { of, throwError } from 'rxjs';
 
 import { last } from 'rxjs/operators';
 
-import { TwainService }   from './twain.service';
+import { TwainService } from './twain.service';
 import { TwainComponent } from './twain.component';
 
 describe('TwainComponent', () => {
@@ -29,11 +29,11 @@ describe('TwainComponent', () => {
     // Create a fake TwainService object with a `getQuote()` spy
     const twainService = jasmine.createSpyObj('TwainService', ['getQuote']);
     // Make the spy return a synchronous Observable with the test data
-    getQuoteSpy = twainService.getQuote.and.returnValue( of(testQuote) );
+    getQuoteSpy = twainService.getQuote.and.returnValue(of(testQuote));
 
     TestBed.configureTestingModule({
-      declarations: [ TwainComponent ],
-      providers:    [
+      declarations: [TwainComponent],
+      providers: [
         { provide: TwainService, useValue: twainService }
       ]
     });
@@ -62,7 +62,7 @@ describe('TwainComponent', () => {
 
     // The error would not be immediately available if the service were truly async.
     // Use `fakeAsync` because the component error calls `setTimeout`
-    it('should display error when TwainService fails', fakeAsync(() => {
+    fit('should display error when TwainService fails', fakeAsync(() => {
       // tell spy to return an error observable
       getQuoteSpy.and.returnValue(
         throwError('TwainService test failure'));
@@ -126,7 +126,7 @@ describe('TwainComponent', () => {
     it('should show last quote (quote done)', (done: DoneFn) => {
       fixture.detectChanges();
 
-      component.quote.pipe( last() ).subscribe(() => {
+      component.quote.pipe(last()).subscribe(() => {
         fixture.detectChanges(); // update view with quote
         expect(quoteEl.textContent).toBe(testQuote);
         expect(errorMessage()).toBeNull('should not show error');

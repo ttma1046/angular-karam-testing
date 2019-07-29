@@ -2,16 +2,16 @@ import {
   async, ComponentFixture, fakeAsync, inject, TestBed, tick
 } from '@angular/core/testing';
 
-import { Router }       from '@angular/router';
+import { Router } from '@angular/router';
 
 import {
   ActivatedRoute, ActivatedRouteStub, asyncData, click, newEvent
 } from '../../testing';
 
-import { Hero }                from '../model/hero';
+import { Hero } from '../model/hero';
 import { HeroDetailComponent } from './hero-detail.component';
-import { HeroDetailService }   from './hero-detail.service';
-import { HeroModule }          from './hero.module';
+import { HeroDetailService } from './hero-detail.service';
+import { HeroModule } from './hero.module';
 
 ////// Testing Vars //////
 let activatedRoute: ActivatedRouteStub;
@@ -34,7 +34,7 @@ describe('HeroDetailComponent', () => {
 
 function overrideSetup() {
   class HeroDetailServiceSpy {
-    testHero: Hero = {id: 42, name: 'Test Hero' };
+    testHero: Hero = { id: 42, name: 'Test Hero' };
 
     /* emit cloned test hero */
     getHero = jasmine.createSpy('getHero').and.callFake(
@@ -55,25 +55,25 @@ function overrideSetup() {
     const routerSpy = createRouterSpy();
 
     TestBed.configureTestingModule({
-      imports:   [ HeroModule ],
+      imports: [HeroModule],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: Router,         useValue: routerSpy},
+        { provide: Router, useValue: routerSpy },
         // HeroDetailService at this level is IRRELEVANT!
         { provide: HeroDetailService, useValue: {} }
       ]
     })
 
-    // Override component's own provider
-    .overrideComponent(HeroDetailComponent, {
-      set: {
-        providers: [
-          { provide: HeroDetailService, useClass: HeroDetailServiceSpy }
-        ]
-      }
-    })
+      // Override component's own provider
+      .overrideComponent(HeroDetailComponent, {
+        set: {
+          providers: [
+            { provide: HeroDetailService, useClass: HeroDetailServiceSpy }
+          ]
+        }
+      })
 
-    .compileComponents();
+      .compileComponents();
   }));
 
   let hdsSpy: HeroDetailServiceSpy;
@@ -114,11 +114,11 @@ function overrideSetup() {
     // inject gets the service from the fixture
     inject([HeroDetailService], (fixtureService: HeroDetailService) => {
 
-    // use `fixture.debugElement.injector` to get service from component
-    const componentService = fixture.debugElement.injector.get(HeroDetailService);
+      // use `fixture.debugElement.injector` to get service from component
+      const componentService = fixture.debugElement.injector.get(HeroDetailService);
 
-    expect(fixtureService).not.toBe(componentService, 'service injected from fixture');
-  }));
+      expect(fixtureService).not.toBe(componentService, 'service injected from fixture');
+    }));
 }
 
 ////////////////////
@@ -131,15 +131,15 @@ function heroModuleSetup() {
     const routerSpy = createRouterSpy();
 
     TestBed.configureTestingModule({
-      imports:   [ HeroModule ],
-  //  declarations: [ HeroDetailComponent ], // NO!  DOUBLE DECLARATION
+      imports: [HeroModule],
+      //  declarations: [ HeroDetailComponent ], // NO!  DOUBLE DECLARATION
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: HeroService,    useClass: TestHeroService },
-        { provide: Router,         useValue: routerSpy},
+        { provide: HeroService, useClass: TestHeroService },
+        { provide: Router, useValue: routerSpy },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   describe('when navigate to existing hero', () => {
@@ -184,7 +184,7 @@ function heroModuleSetup() {
       const nameDisplay: HTMLElement = hostElement.querySelector('span');
 
       // simulate user entering a new name into the input box
-      nameInput.value = 'quick BROWN  fOx';
+      nameInput.value = 'qUICK bROWN  fOX';
 
       // dispatch a DOM event so that Angular learns of input value change.
       nameInput.dispatchEvent(newEvent('input'));
@@ -197,7 +197,7 @@ function heroModuleSetup() {
   });
 
   describe('when navigate with no hero id', () => {
-    beforeEach(async( createComponent ));
+    beforeEach(async(createComponent));
 
     it('should have hero.id === 0', () => {
       expect(component.hero.id).toBe(0);
@@ -227,9 +227,9 @@ function heroModuleSetup() {
     expect(
       // Throws because `inject` only has access to TestBed's injector
       // which is an ancestor of the component's injector
-      inject([HeroDetailService], (hds: HeroDetailService) =>  service = hds )
+      inject([HeroDetailService], (hds: HeroDetailService) => service = hds)
     )
-    .toThrowError(/No provider for HeroDetailService/);
+      .toThrowError(/No provider for HeroDetailService/);
 
     // get `HeroDetailService` with component's own injector
     service = fixture.debugElement.injector.get(HeroDetailService);
@@ -238,23 +238,23 @@ function heroModuleSetup() {
 }
 
 /////////////////////
-import { FormsModule }         from '@angular/forms';
-import { TitleCasePipe }       from '../shared/title-case.pipe';
+import { FormsModule } from '@angular/forms';
+import { TitleCasePipe } from '../shared/title-case.pipe';
 
 function formsModuleSetup() {
   beforeEach(async(() => {
     const routerSpy = createRouterSpy();
 
     TestBed.configureTestingModule({
-      imports:      [ FormsModule ],
-      declarations: [ HeroDetailComponent, TitleCasePipe ],
+      imports: [FormsModule],
+      declarations: [HeroDetailComponent, TitleCasePipe],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: HeroService,    useClass: TestHeroService },
-        { provide: Router,         useValue: routerSpy},
+        { provide: HeroService, useClass: TestHeroService },
+        { provide: Router, useValue: routerSpy },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   it('should display 1st hero\'s name', async(() => {
@@ -267,22 +267,22 @@ function formsModuleSetup() {
 }
 
 ///////////////////////
-import { SharedModule }        from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 function sharedModuleSetup() {
   beforeEach(async(() => {
     const routerSpy = createRouterSpy();
 
     TestBed.configureTestingModule({
-      imports:      [ SharedModule ],
-      declarations: [ HeroDetailComponent ],
+      imports: [SharedModule],
+      declarations: [HeroDetailComponent],
       providers: [
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: HeroService,    useClass: TestHeroService },
-        { provide: Router,         useValue: routerSpy},
+        { provide: HeroService, useClass: TestHeroService },
+        { provide: Router, useValue: routerSpy },
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   it('should display 1st hero\'s name', async(() => {
@@ -312,18 +312,18 @@ function createComponent() {
 
 class Page {
   // getter properties wait to query the DOM until called.
-  get buttons()     { return this.queryAll<HTMLButtonElement>('button'); }
-  get saveBtn()     { return this.buttons[0]; }
-  get cancelBtn()   { return this.buttons[1]; }
+  get buttons() { return this.queryAll<HTMLButtonElement>('button'); }
+  get saveBtn() { return this.buttons[0]; }
+  get cancelBtn() { return this.buttons[1]; }
   get nameDisplay() { return this.query<HTMLElement>('span'); }
-  get nameInput()   { return this.query<HTMLInputElement>('input'); }
+  get nameInput() { return this.query<HTMLInputElement>('input'); }
 
   gotoListSpy: jasmine.Spy;
-  navigateSpy:  jasmine.Spy;
+  navigateSpy: jasmine.Spy;
 
   constructor(fixture: ComponentFixture<HeroDetailComponent>) {
     // get the navigate spy from the injected router spy object
-    const routerSpy = <any> fixture.debugElement.injector.get(Router);
+    const routerSpy = <any>fixture.debugElement.injector.get(Router);
     this.navigateSpy = routerSpy.navigate;
 
     // spy on component's `gotoList()` method

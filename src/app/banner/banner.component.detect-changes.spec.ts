@@ -5,13 +5,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BannerComponent } from './banner.component';
 
 describe('BannerComponent (AutoChangeDetect)', () => {
-  let comp:    BannerComponent;
+  let comp: BannerComponent;
   let fixture: ComponentFixture<BannerComponent>;
-  let h1:      HTMLElement;
+  let h1: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ BannerComponent ],
+      declarations: [BannerComponent],
       providers: [
         { provide: ComponentFixtureAutoDetect, useValue: true }
       ]
